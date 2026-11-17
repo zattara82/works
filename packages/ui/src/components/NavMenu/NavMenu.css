@@ -1,0 +1,162 @@
+.ui-nav,
+.ui-nav *,
+.ui-nav *::before,
+.ui-nav *::after {
+  box-sizing: border-box;
+}
+
+.ui-nav {
+  font-family: var(--ui-font-family);
+  font-size: 0.9375rem;
+}
+
+.ui-nav__list,
+.ui-nav__submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-nav__item {
+  position: relative;
+}
+
+.ui-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: var(--ui-radius);
+  background: transparent;
+  color: var(--ui-color-text-muted);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ui-transition),
+    color var(--ui-transition);
+}
+
+.ui-nav__link:hover {
+  background: var(--ui-color-hover);
+  color: var(--ui-color-text);
+}
+
+.ui-nav__link:focus-visible {
+  outline: 2px solid var(--ui-color-primary);
+  outline-offset: 2px;
+}
+
+.ui-nav__link.is-active {
+  background: var(--ui-color-primary-soft);
+  color: var(--ui-color-primary);
+  font-weight: 600;
+}
+
+.ui-nav__link.is-in-active-path {
+  color: var(--ui-color-text);
+}
+
+.ui-nav__link.is-disabled,
+.ui-nav__link:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ui-nav__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 20px;
+  justify-content: center;
+}
+
+.ui-nav__label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ui-nav__badge {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--ui-color-primary);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.ui-nav__chevron {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--ui-transition);
+}
+
+[aria-expanded='true'] > .ui-nav__chevron {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+/* Vertical : sous-menus en accordéon, indentés */
+.ui-nav--vertical .ui-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ui-nav--vertical .ui-nav__submenu:not(.is-floating) {
+  margin: 2px 0 2px 22px;
+  padding-left: 8px;
+  border-left: 1px solid var(--ui-color-border);
+}
+
+/* Replié : icônes seules */
+.ui-nav.is-collapsed > .ui-nav__list > .ui-nav__item > .ui-nav__link {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+/* Horizontal : liens en ligne dans un en-tête */
+.ui-nav--horizontal .ui-nav__list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Sous-menus flottants (horizontal ou replié) */
+.ui-nav__submenu.is-floating {
+  position: absolute;
+  z-index: 50;
+  min-width: 200px;
+  padding: 6px;
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius);
+  background: var(--ui-color-surface);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+
+.ui-nav--horizontal > .ui-nav__list > .ui-nav__item > .ui-nav__submenu {
+  top: calc(100% + 6px);
+  left: 0;
+}
+
+.ui-nav.is-collapsed > .ui-nav__list > .ui-nav__item > .ui-nav__submenu,
+.ui-nav__submenu.is-floating .ui-nav__submenu.is-floating {
+  top: 0;
+  left: calc(100% + 6px);
+}
+
+.ui-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

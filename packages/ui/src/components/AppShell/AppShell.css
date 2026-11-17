@@ -1,0 +1,258 @@
+.ui-shell,
+.ui-shell *,
+.ui-shell *::before,
+.ui-shell *::after {
+  box-sizing: border-box;
+}
+
+.ui-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: var(--ui-header-height) 1fr auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--ui-color-bg);
+  color: var(--ui-color-text);
+  font-family: var(--ui-font-family);
+}
+
+.ui-shell.has-sidebar {
+  grid-template-columns: var(--ui-sidebar-width) minmax(0, 1fr);
+  grid-template-areas:
+    'header header'
+    'sidebar main'
+    'sidebar footer';
+  transition: grid-template-columns var(--ui-transition);
+}
+
+.ui-shell.has-sidebar.is-collapsed {
+  grid-template-columns: var(--ui-sidebar-width-collapsed) minmax(0, 1fr);
+}
+
+/* Lien d'évitement, visible au focus clavier */
+.ui-shell__skip {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 14px;
+  border-radius: var(--ui-radius);
+  background: var(--ui-color-primary);
+  color: #fff;
+}
+
+.ui-shell__skip:focus {
+  top: 12px;
+}
+
+/* En-tête */
+.ui-shell__header {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ui-color-border);
+  background: var(--ui-color-surface);
+}
+
+.ui-shell__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 1.0625rem;
+}
+
+.ui-shell__header-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ui-shell__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* Bouton menu (hamburger) */
+.ui-shell__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--ui-radius);
+  background: transparent;
+  color: var(--ui-color-text);
+  cursor: pointer;
+}
+
+.ui-shell__toggle:hover {
+  background: var(--ui-color-hover);
+}
+
+.ui-shell__toggle:focus-visible {
+  outline: 2px solid var(--ui-color-primary);
+  outline-offset: 2px;
+}
+
+.ui-shell__burger,
+.ui-shell__burger::before,
+.ui-shell__burger::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.ui-shell__burger {
+  position: relative;
+}
+
+.ui-shell__burger::before,
+.ui-shell__burger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.ui-shell__burger::before {
+  top: -6px;
+}
+
+.ui-shell__burger::after {
+  top: 6px;
+}
+
+/* Barre latérale */
+.ui-shell__sidebar {
+  grid-area: sidebar;
+  position: sticky;
+  top: var(--ui-header-height);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - var(--ui-header-height));
+  border-right: 1px solid var(--ui-color-border);
+  background: var(--ui-color-surface);
+}
+
+.ui-shell__sidebar-body {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+/* Replié : on laisse dépasser les sous-menus flottants */
+.ui-shell.is-collapsed .ui-shell__sidebar-body {
+  padding: 12px 8px;
+  overflow: visible;
+}
+
+.ui-shell__sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--ui-color-border);
+  color: var(--ui-color-text-muted);
+  font-size: 0.8125rem;
+}
+
+/* Contenu */
+.ui-shell__main {
+  grid-area: main;
+  min-width: 0;
+  padding: 24px;
+}
+
+.ui-shell__main:focus {
+  outline: none;
+}
+
+.ui-shell__footer {
+  grid-area: footer;
+  padding: 16px 24px;
+  border-top: 1px solid var(--ui-color-border);
+  color: var(--ui-color-text-muted);
+  font-size: 0.875rem;
+}
+
+.ui-shell__overlay {
+  display: none;
+}
+
+/* Mobile : la barre latérale devient un tiroir */
+@media (max-width: 767.98px) {
+  .ui-shell.has-sidebar,
+  .ui-shell.has-sidebar.is-collapsed {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+  }
+
+  .ui-shell__sidebar {
+    position: fixed;
+    top: var(--ui-header-height);
+    bottom: 0;
+    left: 0;
+    width: min(var(--ui-sidebar-width), 85vw);
+    height: auto;
+    visibility: hidden;
+    transform: translateX(-100%);
+    transition:
+      transform var(--ui-transition),
+      visibility var(--ui-transition);
+  }
+
+  .ui-shell.is-drawer-open .ui-shell__sidebar {
+    visibility: visible;
+    transform: none;
+  }
+
+  .ui-shell__overlay {
+    display: block;
+    position: fixed;
+    inset: var(--ui-header-height) 0 0 0;
+    z-index: 15;
+    background: var(--ui-color-overlay);
+  }
+
+  .ui-shell__main {
+    padding: 16px;
+  }
+
+  /* Le contenu central de l'en-tête est masqué sur mobile, sauf demande contraire */
+  .ui-shell:not(.show-header-content-mobile) .ui-shell__header-content {
+    display: none;
+  }
+
+  .ui-shell__header {
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  .ui-shell__footer {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-shell,
+  .ui-shell__sidebar {
+    transition: none;
+  }
+}

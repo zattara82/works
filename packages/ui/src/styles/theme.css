@@ -1,0 +1,50 @@
+/*
+ * Thème par défaut. Chaque projet peut surcharger ces variables
+ * (ex. `:root { --ui-color-primary: #e11d48; }`) sans toucher aux composants.
+ */
+:root {
+  --ui-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ui-radius: 8px;
+  --ui-transition: 160ms ease;
+
+  --ui-color-bg: #f6f7f9;
+  --ui-color-surface: #ffffff;
+  --ui-color-text: #1c2024;
+  --ui-color-text-muted: #5b6470;
+  --ui-color-border: #e2e5e9;
+  --ui-color-primary: #2563eb;
+  --ui-color-primary-soft: #e8efff;
+  --ui-color-hover: #f0f2f5;
+  --ui-color-overlay: rgb(15 18 22 / 45%);
+
+  --ui-header-height: 60px;
+  --ui-sidebar-width: 260px;
+  --ui-sidebar-width-collapsed: 68px;
+  --ui-breakpoint-mobile: 768px; /* informatif : le CSS utilise 768px en dur */
+}
+
+:root[data-theme='dark'] {
+  --ui-color-bg: #0f1216;
+  --ui-color-surface: #171b21;
+  --ui-color-text: #e8eaed;
+  --ui-color-text-muted: #9aa3ae;
+  --ui-color-border: #2a3038;
+  --ui-color-primary: #6b9bff;
+  --ui-color-primary-soft: #1d2a45;
+  --ui-color-hover: #20262e;
+  --ui-color-overlay: rgb(0 0 0 / 60%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ui-color-bg: #0f1216;
+    --ui-color-surface: #171b21;
+    --ui-color-text: #e8eaed;
+    --ui-color-text-muted: #9aa3ae;
+    --ui-color-border: #2a3038;
+    --ui-color-primary: #6b9bff;
+    --ui-color-primary-soft: #1d2a45;
+    --ui-color-hover: #20262e;
+    --ui-color-overlay: rgb(0 0 0 / 60%);
+  }
+}
