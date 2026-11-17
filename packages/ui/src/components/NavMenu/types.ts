@@ -1,7 +1,11 @@
 import type { MouseEvent, ReactNode } from 'react';
 
-/** Un élément de menu. Un élément avec `children` ouvre un sous-menu. */
+/**
+ * Un élément de menu. Un élément avec `children` ouvre un sous-menu.
+ * `kind: 'section'` affiche un titre de section, `kind: 'divider'` un séparateur.
+ */
 export interface NavItem {
+  kind?: 'item' | 'section' | 'divider';
   /** Identifiant unique, utilisé pour l'état actif et l'ouverture des sous-menus. */
   id: string;
   label: string;

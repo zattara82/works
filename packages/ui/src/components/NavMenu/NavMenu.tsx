@@ -1,5 +1,6 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
+import { ChevronDownIcon } from '../../icons';
 import type { NavItem, NavLinkRenderer } from './types';
 import './NavMenu.css';
 
@@ -106,6 +107,19 @@ export function NavMenu({
 
   const renderItems = (list: NavItem[], depth: number, parentIds: string[]): ReactNode =>
     list.map((item) => {
+      if (item.kind === 'divider') {
+        return <li key={item.id} role="separator" className="ui-nav__divider" />;
+      }
+      if (item.kind === 'section') {
+        // En mode replié, un titre de section devient un simple séparateur.
+        return collapsed && depth === 0 ? (
+          <li key={item.id} role="separator" className="ui-nav__divider" />
+        ) : (
+          <li key={item.id} className="ui-nav__section">
+            {item.label}
+          </li>
+        );
+      }
       const hasChildren = Boolean(item.children?.length);
       const isActive = item.id === activeId;
       const isInActivePath = ancestorIds.includes(item.id);
@@ -129,6 +143,7 @@ export function NavMenu({
 
       const itemClass = cx(
         'ui-nav__link',
+        'ui-focusable',
         isActive && 'is-active',
         isInActivePath && 'is-in-active-path',
         item.disabled && 'is-disabled',
@@ -148,7 +163,7 @@ export function NavMenu({
                 onClick={() => toggle(item, parentIds)}
               >
                 {content}
-                {showLabel && <span className="ui-nav__chevron" aria-hidden="true" />}
+                {showLabel && <ChevronDownIcon className="ui-nav__chevron" />}
               </button>
               <ul
                 id={submenuId}

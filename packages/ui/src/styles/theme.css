@@ -1,50 +1,161 @@
 /*
- * Thème par défaut. Chaque projet peut surcharger ces variables
- * (ex. `:root { --ui-color-primary: #e11d48; }`) sans toucher aux composants.
+ * Thème inspiré de Fluent UI 2 (Microsoft) : palette neutre, couleur de marque
+ * bleue, coins de 4px, ombres en couches, animations courtes.
+ * Chaque projet peut surcharger ces variables (ex. `:root { --ui-color-brand: #c50f1f; }`).
  */
 :root {
-  --ui-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --ui-radius: 8px;
-  --ui-transition: 160ms ease;
+  /* Typographie */
+  --ui-font-family: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont,
+    Roboto, 'Helvetica Neue', sans-serif;
+  --ui-font-size-200: 12px;
+  --ui-font-size-300: 14px;
+  --ui-font-size-400: 16px;
+  --ui-font-size-500: 20px;
+  --ui-line-height-200: 16px;
+  --ui-line-height-300: 20px;
+  --ui-line-height-400: 22px;
+  --ui-line-height-500: 28px;
+  --ui-font-weight-regular: 400;
+  --ui-font-weight-semibold: 600;
 
-  --ui-color-bg: #f6f7f9;
-  --ui-color-surface: #ffffff;
-  --ui-color-text: #1c2024;
-  --ui-color-text-muted: #5b6470;
-  --ui-color-border: #e2e5e9;
-  --ui-color-primary: #2563eb;
-  --ui-color-primary-soft: #e8efff;
-  --ui-color-hover: #f0f2f5;
-  --ui-color-overlay: rgb(15 18 22 / 45%);
+  /* Formes et mouvements */
+  --ui-radius-small: 2px;
+  --ui-radius: 4px;
+  --ui-radius-large: 6px;
+  --ui-radius-xlarge: 8px;
+  --ui-radius-circular: 9999px;
+  --ui-duration-fast: 150ms;
+  --ui-duration-normal: 200ms;
+  --ui-curve-easy-ease: cubic-bezier(0.33, 0, 0.67, 1);
+  --ui-curve-decelerate: cubic-bezier(0.1, 0.9, 0.2, 1);
+  --ui-transition: var(--ui-duration-fast) var(--ui-curve-easy-ease);
 
-  --ui-header-height: 60px;
+  /* Couleurs neutres */
+  --ui-color-bg: #f5f5f5; /* fond de l'application */
+  --ui-color-surface: #ffffff; /* cartes, en-tête, menus flottants */
+  --ui-color-nav: #fafafa; /* barre latérale */
+  --ui-color-text: #242424;
+  --ui-color-text-muted: #424242;
+  --ui-color-text-subtle: #616161;
+  --ui-color-text-disabled: #bdbdbd;
+  --ui-color-border: #e0e0e0;
+  --ui-color-stroke: #d1d1d1;
+  --ui-color-stroke-hover: #c7c7c7;
+  --ui-color-stroke-pressed: #b3b3b3;
+  --ui-color-hover: #f0f0f0;
+  --ui-color-pressed: #e0e0e0;
+  --ui-color-selected: #ebebeb;
+  --ui-color-disabled-bg: #f0f0f0;
+  --ui-color-overlay: rgb(0 0 0 / 40%);
+
+  /* Couleur de marque */
+  --ui-color-brand: #0f6cbd;
+  --ui-color-brand-hover: #115ea3;
+  --ui-color-brand-pressed: #0c3b5e;
+  --ui-color-brand-soft: #ebf3fc;
+  --ui-color-brand-text: #0f6cbd;
+  --ui-color-on-brand: #ffffff;
+  /* Compatibilité avec la version précédente */
+  --ui-color-primary: var(--ui-color-brand);
+  --ui-color-primary-soft: var(--ui-color-brand-soft);
+
+  /* Focus clavier (double contour noir et blanc) */
+  --ui-color-focus-outer: #000000;
+  --ui-color-focus-inner: #ffffff;
+
+  /* Ombres */
+  --ui-shadow-2: 0 0 2px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 14%);
+  --ui-shadow-4: 0 0 2px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 14%);
+  --ui-shadow-8: 0 0 2px rgb(0 0 0 / 12%), 0 4px 8px rgb(0 0 0 / 14%);
+  --ui-shadow-16: 0 0 2px rgb(0 0 0 / 12%), 0 8px 16px rgb(0 0 0 / 14%);
+  --ui-shadow-64: 0 0 8px rgb(0 0 0 / 12%), 0 32px 64px rgb(0 0 0 / 14%);
+
+  /* Dimensions du layout */
+  --ui-header-height: 48px;
   --ui-sidebar-width: 260px;
-  --ui-sidebar-width-collapsed: 68px;
-  --ui-breakpoint-mobile: 768px; /* informatif : le CSS utilise 768px en dur */
+  --ui-sidebar-width-collapsed: 56px;
+
+  color-scheme: light;
 }
 
 :root[data-theme='dark'] {
-  --ui-color-bg: #0f1216;
-  --ui-color-surface: #171b21;
-  --ui-color-text: #e8eaed;
-  --ui-color-text-muted: #9aa3ae;
-  --ui-color-border: #2a3038;
-  --ui-color-primary: #6b9bff;
-  --ui-color-primary-soft: #1d2a45;
-  --ui-color-hover: #20262e;
-  --ui-color-overlay: rgb(0 0 0 / 60%);
+  --ui-color-bg: #1f1f1f;
+  --ui-color-surface: #292929;
+  --ui-color-nav: #262626;
+  --ui-color-text: #ffffff;
+  --ui-color-text-muted: #d6d6d6;
+  --ui-color-text-subtle: #adadad;
+  --ui-color-text-disabled: #5c5c5c;
+  --ui-color-border: #3d3d3d;
+  --ui-color-stroke: #666666;
+  --ui-color-stroke-hover: #757575;
+  --ui-color-stroke-pressed: #6b6b6b;
+  --ui-color-hover: #333333;
+  --ui-color-pressed: #2e2e2e;
+  --ui-color-selected: #383838;
+  --ui-color-disabled-bg: #141414;
+  --ui-color-overlay: rgb(0 0 0 / 50%);
+  --ui-color-brand: #115ea3;
+  --ui-color-brand-hover: #0f6cbd;
+  --ui-color-brand-pressed: #0c3b5e;
+  --ui-color-brand-soft: #082338;
+  --ui-color-brand-text: #479ef5;
+  --ui-color-focus-outer: #ffffff;
+  --ui-color-focus-inner: #000000;
+  --ui-shadow-2: 0 0 2px rgb(0 0 0 / 24%), 0 1px 2px rgb(0 0 0 / 28%);
+  --ui-shadow-4: 0 0 2px rgb(0 0 0 / 24%), 0 2px 4px rgb(0 0 0 / 28%);
+  --ui-shadow-8: 0 0 2px rgb(0 0 0 / 24%), 0 4px 8px rgb(0 0 0 / 28%);
+  --ui-shadow-16: 0 0 2px rgb(0 0 0 / 24%), 0 8px 16px rgb(0 0 0 / 28%);
+  --ui-shadow-64: 0 0 8px rgb(0 0 0 / 24%), 0 32px 64px rgb(0 0 0 / 28%);
+  color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --ui-color-bg: #0f1216;
-    --ui-color-surface: #171b21;
-    --ui-color-text: #e8eaed;
-    --ui-color-text-muted: #9aa3ae;
-    --ui-color-border: #2a3038;
-    --ui-color-primary: #6b9bff;
-    --ui-color-primary-soft: #1d2a45;
-    --ui-color-hover: #20262e;
-    --ui-color-overlay: rgb(0 0 0 / 60%);
+    --ui-color-bg: #1f1f1f;
+    --ui-color-surface: #292929;
+    --ui-color-nav: #262626;
+    --ui-color-text: #ffffff;
+    --ui-color-text-muted: #d6d6d6;
+    --ui-color-text-subtle: #adadad;
+    --ui-color-text-disabled: #5c5c5c;
+    --ui-color-border: #3d3d3d;
+    --ui-color-stroke: #666666;
+    --ui-color-stroke-hover: #757575;
+    --ui-color-stroke-pressed: #6b6b6b;
+    --ui-color-hover: #333333;
+    --ui-color-pressed: #2e2e2e;
+    --ui-color-selected: #383838;
+    --ui-color-disabled-bg: #141414;
+    --ui-color-overlay: rgb(0 0 0 / 50%);
+    --ui-color-brand: #115ea3;
+    --ui-color-brand-hover: #0f6cbd;
+    --ui-color-brand-pressed: #0c3b5e;
+    --ui-color-brand-soft: #082338;
+    --ui-color-brand-text: #479ef5;
+    --ui-color-focus-outer: #ffffff;
+    --ui-color-focus-inner: #000000;
+    --ui-shadow-2: 0 0 2px rgb(0 0 0 / 24%), 0 1px 2px rgb(0 0 0 / 28%);
+    --ui-shadow-4: 0 0 2px rgb(0 0 0 / 24%), 0 2px 4px rgb(0 0 0 / 28%);
+    --ui-shadow-8: 0 0 2px rgb(0 0 0 / 24%), 0 4px 8px rgb(0 0 0 / 28%);
+    --ui-shadow-16: 0 0 2px rgb(0 0 0 / 24%), 0 8px 16px rgb(0 0 0 / 28%);
+    --ui-shadow-64: 0 0 8px rgb(0 0 0 / 24%), 0 32px 64px rgb(0 0 0 / 28%);
+    color-scheme: dark;
   }
+}
+
+/* Focus clavier commun à tous les composants (style Fluent) */
+.ui-focusable:focus-visible {
+  outline: 2px solid var(--ui-color-focus-outer);
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 1px var(--ui-color-focus-inner);
+}
+
+.ui-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }

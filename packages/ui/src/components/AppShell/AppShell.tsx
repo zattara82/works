@@ -1,6 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useId, useState } from 'react';
 import type { MouseEvent, ReactNode } from 'react';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { NavigationIcon } from '../../icons';
+import { Button } from '../Button/Button';
 import './AppShell.css';
 
 export interface AppShellState {
@@ -150,16 +152,15 @@ export function AppShell({
 
         <header className="ui-shell__header">
           {hasSidebar && (
-            <button
-              type="button"
+            <Button
+              appearance="subtle"
               className="ui-shell__toggle"
+              icon={<NavigationIcon />}
               aria-label={toggleLabel}
               aria-controls={sidebarId}
               aria-expanded={isMobile ? mobileSidebarOpen : !collapsed}
               onClick={toggleSidebar}
-            >
-              <span className="ui-shell__burger" aria-hidden="true" />
-            </button>
+            />
           )}
           {brand && <div className="ui-shell__brand">{brand}</div>}
           {headerContent && <div className="ui-shell__header-content">{headerContent}</div>}

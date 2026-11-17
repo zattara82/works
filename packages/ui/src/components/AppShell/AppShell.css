@@ -18,6 +18,8 @@
   background: var(--ui-color-bg);
   color: var(--ui-color-text);
   font-family: var(--ui-font-family);
+  font-size: var(--ui-font-size-300);
+  line-height: var(--ui-line-height-300);
 }
 
 .ui-shell.has-sidebar {
@@ -39,10 +41,12 @@
   top: -100px;
   left: 16px;
   z-index: 100;
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: var(--ui-radius);
-  background: var(--ui-color-primary);
-  color: #fff;
+  background: var(--ui-color-brand);
+  color: var(--ui-color-on-brand);
+  font-weight: var(--ui-font-weight-semibold);
+  box-shadow: var(--ui-shadow-8);
 }
 
 .ui-shell__skip:focus {
@@ -57,9 +61,9 @@
   z-index: 30;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   min-width: 0;
-  padding: 0 16px;
+  padding: 0 12px 0 10px;
   border-bottom: 1px solid var(--ui-color-border);
   background: var(--ui-color-surface);
 }
@@ -69,8 +73,9 @@
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  font-weight: 700;
-  font-size: 1.0625rem;
+  font-size: var(--ui-font-size-400);
+  font-weight: var(--ui-font-weight-semibold);
+  line-height: var(--ui-line-height-400);
 }
 
 .ui-shell__header-content {
@@ -85,59 +90,6 @@
   margin-left: auto;
 }
 
-/* Bouton menu (hamburger) */
-.ui-shell__toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border: 0;
-  border-radius: var(--ui-radius);
-  background: transparent;
-  color: var(--ui-color-text);
-  cursor: pointer;
-}
-
-.ui-shell__toggle:hover {
-  background: var(--ui-color-hover);
-}
-
-.ui-shell__toggle:focus-visible {
-  outline: 2px solid var(--ui-color-primary);
-  outline-offset: 2px;
-}
-
-.ui-shell__burger,
-.ui-shell__burger::before,
-.ui-shell__burger::after {
-  display: block;
-  width: 18px;
-  height: 2px;
-  border-radius: 2px;
-  background: currentColor;
-}
-
-.ui-shell__burger {
-  position: relative;
-}
-
-.ui-shell__burger::before,
-.ui-shell__burger::after {
-  content: '';
-  position: absolute;
-  left: 0;
-}
-
-.ui-shell__burger::before {
-  top: -6px;
-}
-
-.ui-shell__burger::after {
-  top: 6px;
-}
-
 /* Barre latérale */
 .ui-shell__sidebar {
   grid-area: sidebar;
@@ -148,33 +100,33 @@
   flex-direction: column;
   height: calc(100dvh - var(--ui-header-height));
   border-right: 1px solid var(--ui-color-border);
-  background: var(--ui-color-surface);
+  background: var(--ui-color-nav);
 }
 
 .ui-shell__sidebar-body {
   flex: 1;
-  padding: 12px;
+  padding: 8px;
   overflow-y: auto;
 }
 
 /* Replié : on laisse dépasser les sous-menus flottants */
 .ui-shell.is-collapsed .ui-shell__sidebar-body {
-  padding: 12px 8px;
   overflow: visible;
 }
 
 .ui-shell__sidebar-footer {
   padding: 12px;
   border-top: 1px solid var(--ui-color-border);
-  color: var(--ui-color-text-muted);
-  font-size: 0.8125rem;
+  color: var(--ui-color-text-subtle);
+  font-size: var(--ui-font-size-200);
+  line-height: var(--ui-line-height-200);
 }
 
 /* Contenu */
 .ui-shell__main {
   grid-area: main;
   min-width: 0;
-  padding: 24px;
+  padding: 24px 32px;
 }
 
 .ui-shell__main:focus {
@@ -183,10 +135,11 @@
 
 .ui-shell__footer {
   grid-area: footer;
-  padding: 16px 24px;
+  padding: 12px 32px;
   border-top: 1px solid var(--ui-color-border);
-  color: var(--ui-color-text-muted);
-  font-size: 0.875rem;
+  color: var(--ui-color-text-subtle);
+  font-size: var(--ui-font-size-200);
+  line-height: var(--ui-line-height-200);
 }
 
 .ui-shell__overlay {
@@ -206,6 +159,7 @@
 
   .ui-shell__sidebar {
     position: fixed;
+    z-index: 25;
     top: var(--ui-header-height);
     bottom: 0;
     left: 0;
@@ -214,13 +168,14 @@
     visibility: hidden;
     transform: translateX(-100%);
     transition:
-      transform var(--ui-transition),
-      visibility var(--ui-transition);
+      transform var(--ui-duration-normal) var(--ui-curve-decelerate),
+      visibility var(--ui-duration-normal);
   }
 
   .ui-shell.is-drawer-open .ui-shell__sidebar {
     visibility: visible;
     transform: none;
+    box-shadow: var(--ui-shadow-64);
   }
 
   .ui-shell__overlay {

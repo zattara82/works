@@ -105,4 +105,21 @@ describe('NavMenu', () => {
     await user.click(screen.getByText('Dehors'));
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
   });
+
+  it('affiche les titres de section et les séparateurs', () => {
+    const withSections: NavItem[] = [
+      { id: 's1', kind: 'section', label: 'Général' },
+      { id: 'home', label: 'Accueil', href: '/' },
+      { id: 'd1', kind: 'divider', label: '' },
+      { id: 'help', label: 'Aide', href: '/help' },
+    ];
+    const { rerender } = render(<NavMenu items={withSections} />);
+    expect(screen.getByText('Général')).toHaveClass('ui-nav__section');
+    expect(screen.getAllByRole('separator')).toHaveLength(1);
+
+    // Replié : le titre devient un séparateur
+    rerender(<NavMenu items={withSections} collapsed />);
+    expect(screen.queryByText('Général')).not.toBeInTheDocument();
+    expect(screen.getAllByRole('separator')).toHaveLength(2);
+  });
 });

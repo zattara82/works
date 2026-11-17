@@ -1,6 +1,6 @@
 {
   "name": "@works/ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Composants React génériques et réutilisables (layout master page, menu de navigation).",
   "type": "module",
   "main": "./dist/index.js",
